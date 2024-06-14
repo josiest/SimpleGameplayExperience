@@ -13,6 +13,6 @@ class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceSettings : public UDeveloper
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<USimpleGameplayExperience> DefaultGameplayExperience;
+	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly)
+	TSoftObjectPtr<USimpleGameplayExperience> DefaultGameplayExperience;
 };

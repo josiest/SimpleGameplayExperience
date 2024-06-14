@@ -13,12 +13,12 @@ UCLASS(BlueprintType)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimpleGameplayExperience : public UPrimaryDataAsset {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="General")
 	TSubclassOf<APawn> PawnClass;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input")
 	TObjectPtr<UInputMappingContext> InputContext;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input")
 	int ContextPriority;
 };

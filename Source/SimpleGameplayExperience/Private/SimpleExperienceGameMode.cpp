@@ -24,7 +24,7 @@ void ASimpleExperienceGameMode::InitGameState()
     const USimpleGameplayExperience* CurrentExperience = nullptr;
 
     const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
-    if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.Get()) {
+    if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
         CurrentExperience = DefaultExperience;
     }
 #if WITH_EDITOR
@@ -39,13 +39,13 @@ void ASimpleExperienceGameMode::InitGameState()
 #endif
     if (!CurrentExperience) { return; }
 
-    using UExperienceManager = USimpleExperienceManagerComponent;
     if (!ensure(GameState)) {
         UE_LOG(LogGameplayExperience, Error, TEXT("GameState is invalid when trying to initialize "
                                                   "the Current Experience in InitGame!"))
         return;
     }
-    if (auto* ExperienceManager = GameState->FindComponentByClass<USimpleExperienceManagerComponent>()) {
+    using UExperienceManager = USimpleExperienceManagerComponent;
+    if (auto* ExperienceManager = GameState->FindComponentByClass<UExperienceManager>()) {
         ExperienceManager->CurrentExperience = CurrentExperience;
     }
 #if WITH_EDITOR
@@ -61,7 +61,7 @@ UClass * ASimpleExperienceGameMode::GetDefaultPawnClassForController_Implementat
 {
     if (const auto* PlayerState = InController->GetPlayerState<APlayerState>()) {
         using UExperienceComponent = USimpleExperienceStateComponent;
-        if (const auto* ExperienceComponent = PlayerState->FindComponentByClass<USimpleExperienceStateComponent>()) {
+        if (const auto* ExperienceComponent = PlayerState->FindComponentByClass<UExperienceComponent>()) {
             if (ExperienceComponent->PawnData) {
                 return ExperienceComponent->PawnData->PawnClass;
             }
