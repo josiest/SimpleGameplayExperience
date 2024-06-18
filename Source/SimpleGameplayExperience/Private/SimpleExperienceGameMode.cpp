@@ -3,11 +3,12 @@
 
 #include "LogGameplayExperience.h"
 #include "SimpleExperienceGameState.h"
-#include "SimpleExperienceManagerComponent.h"
+#include "Components/SimpleExperienceManagerComponent.h"
+#include "Components/SimpleExperienceStateComponent.h"
 #include "SimpleExperiencePlayerState.h"
 #include "SimpleExperienceSettings.h"
-#include "SimpleExperienceStateComponent.h"
-#include "SimpleGameplayExperience.h"
+#include "Experience/SimpleGameplayExperienceBase.h"
+#include "PawnData/SimplePawnDataBase.h"
 #include "GameFramework/GameStateBase.h"
 
 ASimpleExperienceGameMode::ASimpleExperienceGameMode(const FObjectInitializer & ObjectInitializer)
@@ -21,7 +22,7 @@ ASimpleExperienceGameMode::ASimpleExperienceGameMode(const FObjectInitializer & 
 void ASimpleExperienceGameMode::InitGameState()
 {
     Super::InitGameState();
-    const USimpleGameplayExperience* CurrentExperience = nullptr;
+    const USimpleGameplayExperienceBase* CurrentExperience = nullptr;
 
     const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
     if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {

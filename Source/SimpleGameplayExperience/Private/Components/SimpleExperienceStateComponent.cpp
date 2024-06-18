@@ -1,7 +1,8 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "SimpleExperienceStateComponent.h"
+#include "Components/SimpleExperienceStateComponent.h"
+#include "Components/SimpleExperienceManagerComponent.h"
+#include "Experience/SimpleGameplayExperience.h"
 #include "LogGameplayExperience.h"
-#include "SimpleExperienceManagerComponent.h"
 
 USimpleExperienceStateComponent::USimpleExperienceStateComponent(const FObjectInitializer& ObjectInitializer)
     : Super{ ObjectInitializer }
@@ -20,12 +21,14 @@ void USimpleExperienceStateComponent::InitializeComponent()
     }
 
 	using UExperienceManager = USimpleExperienceManagerComponent;
-	if (const auto* ExperienceManager = GameState->FindComponentByClass<USimpleExperienceManagerComponent>()) {
+	if (const auto* ExperienceManager = GameState->FindComponentByClass<UExperienceManager>()) {
 	    if (!ensure(ExperienceManager->CurrentExperience)) {
 	        UE_LOG(LogGameplayExperience, Error,
 	               TEXT("The Current Experience has not yet been Set on the Experience Manager Component"))
 	    }
-		PawnData = ExperienceManager->CurrentExperience;
+	    else {
+		    PawnData = ExperienceManager->CurrentExperience->GetPawnData();
+	    }
 	}
 #if WITH_EDITOR
 	else {

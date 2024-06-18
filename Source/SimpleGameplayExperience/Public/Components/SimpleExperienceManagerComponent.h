@@ -3,7 +3,7 @@
 #include "Components/GameStateComponent.h"
 #include "SimpleExperienceManagerComponent.generated.h"
 
-class USimpleGameplayExperience;
+class USimpleGameplayExperienceBase;
 
 UCLASS()
 class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceManagerComponent : public UGameStateComponent {
@@ -13,5 +13,5 @@ public:
 	USimpleExperienceManagerComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	UPROPERTY()
-	const USimpleGameplayExperience* CurrentExperience = nullptr;
+	const USimpleGameplayExperienceBase* CurrentExperience = nullptr;
 };

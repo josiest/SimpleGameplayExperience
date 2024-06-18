@@ -4,7 +4,7 @@
 #include "Engine/DeveloperSettings.h"
 #include "SimpleExperienceSettings.generated.h"
 
-class USimpleGameplayExperience;
+class USimpleGameplayExperienceBase;
 /**
  * Settings for the Gameplay Experience plugin
  */
@@ -14,5 +14,5 @@ class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceSettings : public UDeveloper
 
 public:
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly)
-	TSoftObjectPtr<USimpleGameplayExperience> DefaultGameplayExperience;
+	TSoftObjectPtr<USimpleGameplayExperienceBase> DefaultGameplayExperience;
 };
