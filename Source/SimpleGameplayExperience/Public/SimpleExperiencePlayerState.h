@@ -21,5 +21,5 @@ public:
     ASimpleExperiencePlayerState(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
     UPROPERTY()
-    TObjectPtr<USimpleExperiencePlayerStateComponent> ExperienceState;
+    TObjectPtr<USimpleExperiencePlayerStateComponent> PawnDataState;
 };

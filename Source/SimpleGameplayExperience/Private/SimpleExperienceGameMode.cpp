@@ -18,23 +18,21 @@ ASimpleExperienceGameMode::ASimpleExperienceGameMode(const FObjectInitializer & 
     ExperienceManager = CreateDefaultSubobject<UExperienceManager>(TEXT("ExperienceManager"));
 }
 
-
 void ASimpleExperienceGameMode::InitGameState()
 {
     Super::InitGameState();
-    if (!ensure(GameState)) {
-        UE_LOG(LogGameplayExperience, Error, TEXT("GameState is invalid when trying to initialize "
-                                                  "the Current Experience in InitGame!"))
-        return;
+    
+    using UExperienceComponent = USimpleExperienceGameStateComponent;
+    if (auto* ExperienceGameState = Cast<ASimpleExperienceGameState>(GameState)) {
+        ExperienceGameState->ExperienceState->CurrentExperience = ExperienceManager->ChooseExperience();
     }
-    using UExperienceState = USimpleExperienceGameStateComponent;
-    if (auto* ExperienceState = GameState->FindComponentByClass<UExperienceState>()) {
-        ExperienceState->CurrentExperience = ExperienceManager->ChooseExperience();
+    else if (auto* ExperienceComponent = GameState->FindComponentByClass<UExperienceComponent>()) {
+        ExperienceComponent->CurrentExperience = ExperienceManager->ChooseExperience();
     }
 #if WITH_EDITOR
     else {
-        UE_LOG(LogGameplayExperience, Error, TEXT("Unable to find Experience Manager component on Game State. "
-                                                  "Please add the Experience Manager component to your "
+        UE_LOG(LogGameplayExperience, Error, TEXT("Unable to find Experience GameState component on Game State. "
+                                                  "Please add the Experience GameState component to your "
                                                   "GameState class."))
     }
 #endif

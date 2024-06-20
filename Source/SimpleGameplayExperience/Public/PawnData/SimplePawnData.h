@@ -1,8 +1,6 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 
 #pragma once
-
-#include "CoreMinimal.h"
 #include "PawnData/SimplePawnDataBase.h"
 #include "SimplePawnData.generated.h"
 

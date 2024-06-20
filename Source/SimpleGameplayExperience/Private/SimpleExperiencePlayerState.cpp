@@ -5,5 +5,6 @@
 ASimpleExperiencePlayerState::ASimpleExperiencePlayerState(const FObjectInitializer & ObjectInitializer)
     : Super{ ObjectInitializer }
 {
-    ExperienceState = CreateDefaultSubobject<USimpleExperiencePlayerStateComponent>(TEXT("ExperienceState"));
+    using UPawnDataState = USimpleExperiencePlayerStateComponent;
+    PawnDataState = CreateDefaultSubobject<UPawnDataState>(TEXT("PawnDataState"));
 }

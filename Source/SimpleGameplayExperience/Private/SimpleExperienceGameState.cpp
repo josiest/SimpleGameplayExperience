@@ -5,5 +5,6 @@
 ASimpleExperienceGameState::ASimpleExperienceGameState(const FObjectInitializer & ObjectInitializer)
     : Super{ ObjectInitializer }
 {
-    ExperienceManager = CreateDefaultSubobject<USimpleExperienceGameStateComponent>(TEXT("ExperienceManager"));
+    using UExperienceState = USimpleExperienceGameStateComponent;
+    ExperienceState = CreateDefaultSubobject<UExperienceState>(TEXT("ExperienceState"));
 }

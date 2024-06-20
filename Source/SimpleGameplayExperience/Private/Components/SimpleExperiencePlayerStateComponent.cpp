@@ -20,21 +20,21 @@ void USimpleExperiencePlayerStateComponent::InitializeComponent()
                     "Experience State component is initialized on the player state"))
     }
 
-	using UExperienceManager = USimpleExperienceGameStateComponent;
-	if (const auto* ExperienceManager = GameState->FindComponentByClass<UExperienceManager>()) {
-	    if (!ensure(ExperienceManager->CurrentExperience)) {
+	using UExperienceState = USimpleExperienceGameStateComponent;
+	if (const auto* ExperienceState = GameState->FindComponentByClass<UExperienceState>()) {
+	    if (!ensure(ExperienceState->CurrentExperience)) {
 	        UE_LOG(LogGameplayExperience, Error,
-	               TEXT("The Current Experience has not yet been Set on the Experience Manager Component"))
+	               TEXT("The Current Experience has not yet been Set on the Experience GameState Component"))
 	    }
 	    else {
-		    PawnData = ExperienceManager->CurrentExperience->GetPawnData();
+		    PawnData = ExperienceState->CurrentExperience->PawnData;
 	    }
 	}
-#if WITH_EDITOR
+#if !UE_BUILD_SHIPPING
 	else {
 		UE_LOG(LogGameplayExperience, Error,
-		       TEXT("Unable to find Experience Manager component on Game State. "
-					"Please add an Experience Manager component to your custom GameState class."))
+		       TEXT("Unable to find Experience GameState component on Game State. "
+					"Please add an Experience GameState component to your custom GameState class."))
 	}
 #endif
 }

@@ -14,9 +14,6 @@ UCLASS(Abstract)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimpleGameplayExperienceBase : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:
-    template<typename PawnDataType, TEMPLATE_REQUIRES(TIsDerivedFrom<PawnDataType, USimplePawnDataBase>::IsDerived)>
-    PawnDataType* GetPawnDataAs() const { return Cast<PawnDataType>(GetPawnData()); }
-
-    /** Get the pawn data this experience will set up. */
-    virtual USimplePawnDataBase* GetPawnData() const { return nullptr; }
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="General")
+    TObjectPtr<USimplePawnDataBase> PawnData;
 };

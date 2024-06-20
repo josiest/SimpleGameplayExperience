@@ -3,6 +3,7 @@
 #include "Components/SimpleExperienceGameModeComponent.h"
 
 #include "LogGameplayExperience.h"
+#include "SimpleExperiencePlayerState.h"
 #include "Components/SimpleExperiencePlayerStateComponent.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Experience/SimpleExperienceWorldSettings.h"
@@ -15,58 +16,46 @@ USimpleExperienceGameModeComponent::USimpleExperienceGameModeComponent(const FOb
 
 const USimpleGameplayExperienceBase * USimpleExperienceGameModeComponent::ChooseExperience() const
 {
-    const USimpleGameplayExperienceBase* CurrentExperience = nullptr;
-    if (!CurrentExperience) {
-        if (const auto* WorldSettings = Cast<ASimpleExperienceWorldSettings>(GetOwner()->GetWorldSettings())) {
-            if (const auto* DefaultExperience = WorldSettings->DefaultExperience.LoadSynchronous()) {
-                CurrentExperience = DefaultExperience;
-            }
+    if (const auto* WorldSettings = Cast<ASimpleExperienceWorldSettings>(GetOwner()->GetWorldSettings())) {
+        if (const auto* DefaultExperience = WorldSettings->DefaultExperience.LoadSynchronous()) {
+            return DefaultExperience;
         }
     }
-
-    if (!CurrentExperience) {
-        const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
-        if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
-            CurrentExperience = DefaultExperience;
-        }
+    const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
+    if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
+        return DefaultExperience;
     }
-#if WITH_EDITOR
-    else if (!CurrentExperience) {
-        UE_LOG(LogGameplayExperience, Error,TEXT("Unable to load any experience, please set the default "
-                                                  "gameplay experience in gameplay settings"));
-    }
-    else {
-        UE_LOG(LogGameplayExperience, Warning,
-               TEXT("Default Experience is not set, please set it in gameplay settings"));
-    }
+#if !UE_BUILD_SHIPPING
+    UE_LOG(LogGameplayExperience, Warning,
+           TEXT("Default Experience is not set, please set it in gameplay settings"));
 #endif
-    return CurrentExperience;
+    return nullptr;
 }
 
 UClass * USimpleExperienceGameModeComponent::GetPawnClassForController(AController * Controller) const
 {
-    if (const auto* PlayerState = Controller->GetPlayerState<APlayerState>()) {
-        using UExperienceComponent = USimpleExperiencePlayerStateComponent;
-        if (const auto* ExperienceComponent = PlayerState->FindComponentByClass<UExperienceComponent>()) {
-            if (ExperienceComponent->PawnData) {
-                return ExperienceComponent->PawnData->PawnClass;
-            }
-#if WITH_EDITOR
-            UE_LOG(LogGameplayExperience, Error,
-                   TEXT("Pawn Data hasn't yet been set on the Experience State component! "
-                        "The logic for when the Pawn Data is set likely needs to be changed. "
-                        "It's possible that the Pawn Data is set before the Experience is set on the "
-                        "GameState Experience Manager Component!"))
-#endif
-        }
-#if WITH_EDITOR
-        else {
-            UE_LOG(LogGameplayExperience, Error,
-                   TEXT("Unable to find Experience component on Controller. "
-                        "Please add the Controller Experience component to your custom Controller class"))
-        }
-#endif
+    const auto* PlayerState = Controller->GetPlayerState<APlayerState>();
+    if (!PlayerState) { return nullptr; }
+
+    // If the player state is a subclass of SimpleExperiencePlayerState,
+    // it _should_ be faster to directly reference the component member
+    if (const auto* ExperiencePlayerState = Cast<ASimpleExperiencePlayerState>(PlayerState)) {
+        return ExperiencePlayerState->PawnDataState->PawnData->PawnClass;
     }
+    // However, the plugin doesn't require that you derive from SimpleExperiencePlayerState.
+    // To support a composition-oriented approach, find the component among the other actor components
+    //
+    // Note: if the actor doesn't have many components, this shouldn't be _too_ much slower
+    //       than the inheritance approach.
+    using UPawnDataState = USimpleExperiencePlayerStateComponent;
+    if (const auto* PawnDataState = PlayerState->FindComponentByClass<UPawnDataState>()) {
+        return PawnDataState->PawnData->PawnClass;
+    }
+#if !UE_BUILD_SHIPPING
+    UE_LOG(LogGameplayExperience, Error,
+           TEXT("Unable to find Experience component on Controller. "
+                "Please add the Controller Experience component to your custom Controller class"))
+#endif
     return nullptr;
 }
 
