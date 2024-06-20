@@ -3,7 +3,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "SimpleExperienceGameState.generated.h"
 
-class USimpleExperienceManagerComponent;
+class USimpleExperienceGameStateComponent;
 
 /**
  * USimpleExperienceGameState
@@ -22,5 +22,5 @@ public:
     ASimpleExperienceGameState(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
     
     UPROPERTY()
-    TObjectPtr<USimpleExperienceManagerComponent> ExperienceManager;
+    TObjectPtr<USimpleExperienceGameStateComponent> ExperienceManager;
 };

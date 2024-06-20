@@ -1,16 +1,16 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "Components/SimpleExperienceStateComponent.h"
-#include "Components/SimpleExperienceManagerComponent.h"
+#include "Components/SimpleExperiencePlayerStateComponent.h"
+#include "Components/SimpleExperienceGameStateComponent.h"
 #include "Experience/SimpleGameplayExperience.h"
 #include "LogGameplayExperience.h"
 
-USimpleExperienceStateComponent::USimpleExperienceStateComponent(const FObjectInitializer& ObjectInitializer)
+USimpleExperiencePlayerStateComponent::USimpleExperiencePlayerStateComponent(const FObjectInitializer& ObjectInitializer)
     : Super{ ObjectInitializer }
 {
     bWantsInitializeComponent = true;
 }
 
-void USimpleExperienceStateComponent::InitializeComponent()
+void USimpleExperiencePlayerStateComponent::InitializeComponent()
 {
     Super::InitializeComponent();
 	const auto* GameState = GetWorld()->GetGameState();
@@ -20,7 +20,7 @@ void USimpleExperienceStateComponent::InitializeComponent()
                     "Experience State component is initialized on the player state"))
     }
 
-	using UExperienceManager = USimpleExperienceManagerComponent;
+	using UExperienceManager = USimpleExperienceGameStateComponent;
 	if (const auto* ExperienceManager = GameState->FindComponentByClass<UExperienceManager>()) {
 	    if (!ensure(ExperienceManager->CurrentExperience)) {
 	        UE_LOG(LogGameplayExperience, Error,

@@ -1,7 +1,7 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 #pragma once
 #include "Components/PlayerStateComponent.h"
-#include "SimpleExperienceStateComponent.generated.h"
+#include "SimpleExperiencePlayerStateComponent.generated.h"
 
 
 class USimplePawnDataBase;
@@ -13,11 +13,11 @@ class USimplePawnDataBase;
  * Keeps track of PawnData used for creating the player.
  */
 UCLASS()
-class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceStateComponent : public UPlayerStateComponent {
+class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperiencePlayerStateComponent : public UPlayerStateComponent {
     GENERATED_BODY()
 
 public:
-    USimpleExperienceStateComponent(const FObjectInitializer& ObjectInitializer);
+    USimpleExperiencePlayerStateComponent(const FObjectInitializer& ObjectInitializer);
     virtual void InitializeComponent() override;
 
     UPROPERTY()

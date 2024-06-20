@@ -4,6 +4,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "SimpleExperienceGameMode.generated.h"
 
+class USimpleExperienceGameModeComponent;
 /**
  * Replaces GameMode functionality with Data-Oriented Experiences
  */
@@ -14,4 +15,7 @@ public:
     ASimpleExperienceGameMode(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
     virtual void InitGameState() override;
 	virtual UClass* GetDefaultPawnClassForController_Implementation(AController * InController) override;
+
+    UPROPERTY()
+    TObjectPtr<USimpleExperienceGameModeComponent> ExperienceManager;
 };
