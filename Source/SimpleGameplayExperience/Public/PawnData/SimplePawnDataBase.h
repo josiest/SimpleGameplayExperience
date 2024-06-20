@@ -5,10 +5,10 @@
 #include "SimplePawnDataBase.generated.h"
 
 /**
- * USimplePawnData
- *  The most basic PawnData type. Derive from this class to add more to your pawn data
+ * USimplePawnDataBase
+ *  The base class for all pawn data.
  */
-UCLASS(BlueprintType, Const)
+UCLASS(Abstract)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnDataBase : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:

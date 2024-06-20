@@ -3,10 +3,11 @@
 
 #include "LogGameplayExperience.h"
 #include "SimpleExperienceGameState.h"
+#include "SimpleExperiencePlayerState.h"
 #include "Components/SimpleExperienceManagerComponent.h"
 #include "Components/SimpleExperienceStateComponent.h"
-#include "SimpleExperiencePlayerState.h"
-#include "SimpleExperienceSettings.h"
+#include "Experience/SimpleExperienceSettings.h"
+#include "Experience/SimpleExperienceWorldSettings.h"
 #include "Experience/SimpleGameplayExperienceBase.h"
 #include "PawnData/SimplePawnDataBase.h"
 #include "GameFramework/GameStateBase.h"
@@ -23,10 +24,19 @@ void ASimpleExperienceGameMode::InitGameState()
 {
     Super::InitGameState();
     const USimpleGameplayExperienceBase* CurrentExperience = nullptr;
+    if (!CurrentExperience) {
+        if (const auto* WorldSettings = Cast<ASimpleExperienceWorldSettings>(GetWorldSettings())) {
+            if (const auto* DefaultExperience = WorldSettings->DefaultExperience.LoadSynchronous()) {
+                CurrentExperience = DefaultExperience;
+            }
+        }
+    }
 
-    const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
-    if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
-        CurrentExperience = DefaultExperience;
+    if (!CurrentExperience) {
+        const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
+        if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
+            CurrentExperience = DefaultExperience;
+        }
     }
 #if WITH_EDITOR
     else if (!CurrentExperience) {

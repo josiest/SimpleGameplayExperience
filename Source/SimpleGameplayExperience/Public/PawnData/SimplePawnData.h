@@ -11,7 +11,7 @@ class UInputMappingContext;
  * USimplePawnData
  *  Simple concrete data class for the most basic pawn setup.
  */
-UCLASS()
+UCLASS(BlueprintType, Const)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnData : public USimplePawnDataBase {
     GENERATED_BODY()
 public:
