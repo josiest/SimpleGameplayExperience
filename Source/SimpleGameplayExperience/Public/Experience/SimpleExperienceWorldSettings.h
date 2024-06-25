@@ -16,5 +16,5 @@ public:
     ASimpleExperienceWorldSettings(const FObjectInitializer& ObjectInitializer);
 
     UPROPERTY(EditDefaultsOnly, Category=GameMode)
-    TSoftObjectPtr<USimpleGameplayExperienceBase> DefaultExperience;
+    TSoftObjectPtr<const USimpleGameplayExperienceBase> DefaultExperience;
 };

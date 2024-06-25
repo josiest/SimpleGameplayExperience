@@ -21,15 +21,7 @@ const USimpleGameplayExperienceBase * USimpleExperienceGameModeComponent::Choose
             return DefaultExperience;
         }
     }
-    const auto* ExperienceSettings = GetDefault<USimpleExperienceSettings>();
-    if (const auto* DefaultExperience = ExperienceSettings->DefaultGameplayExperience.LoadSynchronous()) {
-        return DefaultExperience;
-    }
-#if !UE_BUILD_SHIPPING
-    UE_LOG(LogGameplayExperience, Warning,
-           TEXT("Default Experience is not set, please set it in gameplay settings"));
-#endif
-    return nullptr;
+    return USimpleExperienceSettings::GetOrLoadDefaultGameplayExperience();
 }
 
 UClass * USimpleExperienceGameModeComponent::GetPawnClassForController(AController * Controller) const

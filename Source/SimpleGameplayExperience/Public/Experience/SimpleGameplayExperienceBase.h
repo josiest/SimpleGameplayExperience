@@ -10,10 +10,15 @@ class USimplePawnDataBase;
  * USimpleGameplayExperienceBase
  *  Base Class for Gameplay Experiences.
  */
-UCLASS(Abstract)
+UCLASS(Blueprintable)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimpleGameplayExperienceBase : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:
+    USimpleGameplayExperienceBase();
+#if WITH_EDITOR
+    virtual EDataValidationResult IsDataValid(FDataValidationContext & Context) const override;
+#endif
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="General")
-    TObjectPtr<USimplePawnDataBase> PawnData;
+    TObjectPtr<const USimplePawnDataBase> PawnData;
 };

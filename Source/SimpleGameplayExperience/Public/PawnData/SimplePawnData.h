@@ -13,8 +13,13 @@ UCLASS(BlueprintType, Const)
 class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnData : public USimplePawnDataBase {
     GENERATED_BODY()
 public:
+    USimplePawnData();
+#if WITH_EDITOR
+    virtual EDataValidationResult IsDataValid(FDataValidationContext & Context) const override;
+#endif
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input")
-    TObjectPtr<UInputMappingContext> InputContext;
+    TObjectPtr<const UInputMappingContext> InputContext;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input")
     int ContextPriority = 0;
