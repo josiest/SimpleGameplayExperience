@@ -1,9 +1,9 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "SimpleExperienceGameMode.h"
+#include "GameMode/SimpleExperienceGameMode.h"
 
 #include "LogGameplayExperience.h"
-#include "SimpleExperienceGameState.h"
-#include "SimpleExperiencePlayerState.h"
+#include "GameMode/SimpleExperienceGameState.h"
+#include "GameMode/SimpleExperiencePlayerState.h"
 #include "Components/SimpleExperienceGameModeComponent.h"
 #include "Components/SimpleExperienceGameStateComponent.h"
 #include "GameFramework/GameStateBase.h"

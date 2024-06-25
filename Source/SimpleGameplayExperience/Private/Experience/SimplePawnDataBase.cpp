@@ -1,5 +1,5 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "PawnData/SimplePawnDataBase.h"
+#include "Experience/SimplePawnDataBase.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Misc/DataValidation.h"
 

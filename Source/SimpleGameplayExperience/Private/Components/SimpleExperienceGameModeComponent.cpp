@@ -3,11 +3,11 @@
 #include "Components/SimpleExperienceGameModeComponent.h"
 
 #include "LogGameplayExperience.h"
-#include "SimpleExperiencePlayerState.h"
+#include "GameMode/SimpleExperiencePlayerState.h"
 #include "Components/SimpleExperiencePlayerStateComponent.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Experience/SimpleExperienceWorldSettings.h"
-#include "PawnData/SimplePawnDataBase.h"
+#include "Experience/SimplePawnDataBase.h"
 
 USimpleExperienceGameModeComponent::USimpleExperienceGameModeComponent(const FObjectInitializer& ObjectInitializer)
     : Super{ ObjectInitializer }

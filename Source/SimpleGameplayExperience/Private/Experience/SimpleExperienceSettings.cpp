@@ -5,7 +5,7 @@
 #include "LogGameplayExperience.h"
 #include "Experience/SimpleGameplayExperienceBase.h"
 #include "GameFramework/DefaultPawn.h"
-#include "PawnData/SimplePawnDataBase.h"
+#include "Experience/SimplePawnDataBase.h"
 
 const FTopLevelAssetPath USimpleExperienceSettings::DefaultExampleExperiencePath{
     TEXT("/SimpleGameplayExperience/Examples/DefaultExperience/EXP_DefaultExperience")

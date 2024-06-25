@@ -1,5 +1,5 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "SimpleExperienceGameState.h"
+#include "GameMode/SimpleExperienceGameState.h"
 #include "Components/SimpleExperienceGameStateComponent.h"
 
 ASimpleExperienceGameState::ASimpleExperienceGameState(const FObjectInitializer & ObjectInitializer)

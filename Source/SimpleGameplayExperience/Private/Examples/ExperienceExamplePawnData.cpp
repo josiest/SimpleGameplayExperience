@@ -1,11 +1,11 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "PawnData/SimplePawnData.h"
+#include "Examples/ExperienceExamplePawnData.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Misc/DataValidation.h"
 
 #define LOCTEXT_NAMESPACE "SimplePawnData"
 
-USimplePawnData::USimplePawnData()
+UExperienceExamplePawnData::UExperienceExamplePawnData()
 {
     if (!InputContext) {
         InputContext = USimpleExperienceSettings::GetOrLoadDefaultInputContext();
@@ -13,7 +13,7 @@ USimplePawnData::USimplePawnData()
 }
 
 #if WITH_EDITOR
-EDataValidationResult USimplePawnData::IsDataValid(FDataValidationContext & Context) const
+EDataValidationResult UExperienceExamplePawnData::IsDataValid(FDataValidationContext & Context) const
 {
     auto Validity = EDataValidationResult::Valid;
     if (!InputContext) {

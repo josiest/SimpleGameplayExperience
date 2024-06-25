@@ -1,8 +1,8 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 
 #pragma once
-#include "PawnData/SimplePawnDataBase.h"
-#include "SimplePawnData.generated.h"
+#include "Experience/SimplePawnDataBase.h"
+#include "ExperienceExamplePawnData.generated.h"
 
 class UInputMappingContext;
 /**
@@ -10,10 +10,10 @@ class UInputMappingContext;
  *  Simple concrete data class for the most basic pawn setup.
  */
 UCLASS(BlueprintType, Const)
-class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnData : public USimplePawnDataBase {
+class SIMPLEGAMEPLAYEXPERIENCE_API UExperienceExamplePawnData : public USimplePawnDataBase {
     GENERATED_BODY()
 public:
-    USimplePawnData();
+    UExperienceExamplePawnData();
 #if WITH_EDITOR
     virtual EDataValidationResult IsDataValid(FDataValidationContext & Context) const override;
 #endif

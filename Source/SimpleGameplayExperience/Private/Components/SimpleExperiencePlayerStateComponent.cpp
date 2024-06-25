@@ -1,7 +1,7 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 #include "Components/SimpleExperiencePlayerStateComponent.h"
 #include "Components/SimpleExperienceGameStateComponent.h"
-#include "Experience/SimpleGameplayExperience.h"
+#include "Experience/SimpleGameplayExperienceBase.h"
 #include "LogGameplayExperience.h"
 
 USimpleExperiencePlayerStateComponent::USimpleExperiencePlayerStateComponent(const FObjectInitializer& ObjectInitializer)
