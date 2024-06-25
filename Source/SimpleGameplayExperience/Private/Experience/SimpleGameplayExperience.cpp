@@ -1,11 +1,11 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "Experience/SimpleGameplayExperienceBase.h"
+#include "Experience/SimpleGameplayExperience.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Misc/DataValidation.h"
 
 #define LOCTEXT_NAMESPACE "SimpleGameplayExperienceBase"
 
-USimpleGameplayExperienceBase::USimpleGameplayExperienceBase()
+USimpleGameplayExperience::USimpleGameplayExperience()
 {
     if (!PawnData) {
         PawnData = USimpleExperienceSettings::GetOrLoadDefaultPawnData();
@@ -13,7 +13,7 @@ USimpleGameplayExperienceBase::USimpleGameplayExperienceBase()
 }
 
 #if WITH_EDITOR
-EDataValidationResult USimpleGameplayExperienceBase::IsDataValid(FDataValidationContext & Context) const
+EDataValidationResult USimpleGameplayExperience::IsDataValid(FDataValidationContext & Context) const
 {
     auto Validity = EDataValidationResult::Valid;
     if (!PawnData) {

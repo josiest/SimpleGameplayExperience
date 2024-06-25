@@ -4,7 +4,7 @@
 #include "GameFramework/WorldSettings.h"
 #include "SimpleExperienceWorldSettings.generated.h"
 
-class USimpleGameplayExperienceBase;
+class USimpleGameplayExperience;
 /**
  * ASimpleExperienceWorldSettings
  *  World settings for the simple gameplay experience plugin.
@@ -16,5 +16,5 @@ public:
     ASimpleExperienceWorldSettings(const FObjectInitializer& ObjectInitializer);
 
     UPROPERTY(EditDefaultsOnly, Category=GameMode)
-    TSoftObjectPtr<const USimpleGameplayExperienceBase> DefaultExperience;
+    TSoftObjectPtr<const USimpleGameplayExperience> DefaultExperience;
 };

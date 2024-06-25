@@ -1,11 +1,11 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
-#include "Experience/SimplePawnDataBase.h"
+#include "Experience/SimplePawnData.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Misc/DataValidation.h"
 
 #define LOCTEXT_NAMESPACE "SimplePawnDataBase"
 
-USimplePawnDataBase::USimplePawnDataBase()
+USimplePawnData::USimplePawnData()
 {
     if (!PawnClass) {
         PawnClass = USimpleExperienceSettings::GetOrLoadDefaultPawnClass();
@@ -13,7 +13,7 @@ USimplePawnDataBase::USimplePawnDataBase()
 }
 
 #if WITH_EDITOR
-EDataValidationResult USimplePawnDataBase::IsDataValid(FDataValidationContext & Context) const
+EDataValidationResult USimplePawnData::IsDataValid(FDataValidationContext & Context) const
 {
     auto IsValidResult = EDataValidationResult::Valid;
     if (!PawnClass) {

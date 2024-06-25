@@ -1,7 +1,7 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 
 #pragma once
-#include "Experience/SimplePawnDataBase.h"
+#include "Experience/SimplePawnData.h"
 #include "ExperienceExamplePawnData.generated.h"
 
 class UInputMappingContext;
@@ -10,7 +10,7 @@ class UInputMappingContext;
  *  Simple concrete data class for the most basic pawn setup.
  */
 UCLASS(BlueprintType, Const)
-class SIMPLEGAMEPLAYEXPERIENCE_API UExperienceExamplePawnData : public USimplePawnDataBase {
+class SIMPLEGAMEPLAYEXPERIENCE_API UExperienceExamplePawnData : public USimplePawnData {
     GENERATED_BODY()
 public:
     UExperienceExamplePawnData();

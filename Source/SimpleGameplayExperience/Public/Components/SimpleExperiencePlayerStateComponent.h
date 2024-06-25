@@ -4,7 +4,7 @@
 #include "SimpleExperiencePlayerStateComponent.generated.h"
 
 
-class USimplePawnDataBase;
+class USimplePawnData;
 
 /**
  * USimpleExperienceStateComponent
@@ -21,5 +21,5 @@ public:
     virtual void InitializeComponent() override;
 
     UPROPERTY()
-    const USimplePawnDataBase* PawnData = nullptr;
+    const USimplePawnData* PawnData = nullptr;
 };

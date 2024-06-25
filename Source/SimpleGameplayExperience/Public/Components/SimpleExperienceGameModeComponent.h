@@ -5,7 +5,7 @@
 #include "SimpleExperienceGameModeComponent.generated.h"
 
 
-class USimpleGameplayExperienceBase;
+class USimpleGameplayExperience;
 
 UCLASS()
 class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceGameModeComponent : public UActorComponent {
@@ -13,6 +13,6 @@ class SIMPLEGAMEPLAYEXPERIENCE_API USimpleExperienceGameModeComponent : public U
 
 public:
     USimpleExperienceGameModeComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
-    virtual const USimpleGameplayExperienceBase* ChooseExperience() const;
+    virtual const USimpleGameplayExperience* ChooseExperience() const;
     virtual UClass* GetPawnClassForController(AController* Controller) const;
 };

@@ -7,14 +7,14 @@
 #include "Components/SimpleExperiencePlayerStateComponent.h"
 #include "Experience/SimpleExperienceSettings.h"
 #include "Experience/SimpleExperienceWorldSettings.h"
-#include "Experience/SimplePawnDataBase.h"
+#include "Experience/SimplePawnData.h"
 
 USimpleExperienceGameModeComponent::USimpleExperienceGameModeComponent(const FObjectInitializer& ObjectInitializer)
     : Super{ ObjectInitializer }
 {
 }
 
-const USimpleGameplayExperienceBase * USimpleExperienceGameModeComponent::ChooseExperience() const
+const USimpleGameplayExperience * USimpleExperienceGameModeComponent::ChooseExperience() const
 {
     if (const auto* WorldSettings = Cast<ASimpleExperienceWorldSettings>(GetOwner()->GetWorldSettings())) {
         if (const auto* DefaultExperience = WorldSettings->DefaultExperience.LoadSynchronous()) {

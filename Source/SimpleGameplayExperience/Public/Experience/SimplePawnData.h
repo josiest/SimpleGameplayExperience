@@ -2,17 +2,17 @@
 
 #pragma once
 #include "Engine/DataAsset.h"
-#include "SimplePawnDataBase.generated.h"
+#include "SimplePawnData.generated.h"
 
 /**
  * USimplePawnDataBase
  *  The base class for all pawn data.
  */
 UCLASS(Blueprintable)
-class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnDataBase : public UPrimaryDataAsset {
+class SIMPLEGAMEPLAYEXPERIENCE_API USimplePawnData : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:
-    USimplePawnDataBase();
+    USimplePawnData();
 #if WITH_EDITOR
     virtual EDataValidationResult IsDataValid(FDataValidationContext & Context) const override;
 #endif

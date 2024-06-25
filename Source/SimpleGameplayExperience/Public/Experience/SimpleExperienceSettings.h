@@ -4,10 +4,9 @@
 #include "Engine/DeveloperSettings.h"
 #include "SimpleExperienceSettings.generated.h"
 
-class USimpleGameplayExperience;
 class UInputMappingContext;
-class USimplePawnDataBase;
-class USimpleGameplayExperienceBase;
+class USimplePawnData;
+class USimpleGameplayExperience;
 /**
  * Settings for the Gameplay Experience plugin
  */
@@ -22,10 +21,10 @@ public:
 
     // Pawn Data utilities
     static TSubclassOf<APawn> GetOrLoadDefaultPawnClass();
-    static const USimplePawnDataBase* GetOrLoadDefaultPawnData();
+    static const USimplePawnData* GetOrLoadDefaultPawnData();
 
     // Experience utilities
-    static const USimpleGameplayExperienceBase* GetOrLoadDefaultGameplayExperience();
+    static const USimpleGameplayExperience* GetOrLoadDefaultGameplayExperience();
 
     // Example utilities
     static const UInputMappingContext* GetOrLoadDefaultInputContext();
@@ -34,10 +33,10 @@ public:
     TSoftClassPtr<APawn> DefaultPawnClass;
 
     UPROPERTY(Config, EditDefaultsOnly, Category="Pawn")
-    TSoftObjectPtr<const USimplePawnDataBase> DefaultPawnData;
+    TSoftObjectPtr<const USimplePawnData> DefaultPawnData;
 
 	UPROPERTY(Config, EditDefaultsOnly, Category="Experience")
-	TSoftObjectPtr<const USimpleGameplayExperienceBase> DefaultGameplayExperience;
+	TSoftObjectPtr<const USimpleGameplayExperience> DefaultGameplayExperience;
 
     UPROPERTY(Config, EditDefaultsOnly, Category="Example")
     TSoftObjectPtr<const UInputMappingContext> DefaultExamplePawnDataInputContext;

@@ -3,9 +3,9 @@
 
 #include "InputMappingContext.h"
 #include "LogGameplayExperience.h"
-#include "Experience/SimpleGameplayExperienceBase.h"
+#include "Experience/SimpleGameplayExperience.h"
 #include "GameFramework/DefaultPawn.h"
-#include "Experience/SimplePawnDataBase.h"
+#include "Experience/SimplePawnData.h"
 
 const FTopLevelAssetPath USimpleExperienceSettings::DefaultExampleExperiencePath{
     TEXT("/SimpleGameplayExperience/Examples/DefaultExperience/EXP_DefaultExperience")
@@ -39,7 +39,7 @@ TSubclassOf<APawn> USimpleExperienceSettings::GetOrLoadDefaultPawnClass()
     return Settings->DefaultPawnClass.LoadSynchronous();
 }
 
-const USimplePawnDataBase * USimpleExperienceSettings::GetOrLoadDefaultPawnData()
+const USimplePawnData * USimpleExperienceSettings::GetOrLoadDefaultPawnData()
 {
     const auto* Settings = GetDefault<USimpleExperienceSettings>();
     auto PawnDataToLoad = Settings->DefaultPawnData;
@@ -51,7 +51,7 @@ const USimplePawnDataBase * USimpleExperienceSettings::GetOrLoadDefaultPawnData(
                                                     "Project Settings > Game > Simple Experience Settings > "
                                                     "Pawn > Default Pawn Data"))
 #endif
-        PawnDataToLoad = NewObject<USimplePawnDataBase>();
+        PawnDataToLoad = NewObject<USimplePawnData>();
     }
     if (PawnDataToLoad.IsValid()) {
         return PawnDataToLoad.Get();
@@ -60,7 +60,7 @@ const USimplePawnDataBase * USimpleExperienceSettings::GetOrLoadDefaultPawnData(
 }
 
 
-const USimpleGameplayExperienceBase * USimpleExperienceSettings::GetOrLoadDefaultGameplayExperience()
+const USimpleGameplayExperience * USimpleExperienceSettings::GetOrLoadDefaultGameplayExperience()
 {
     const auto* Settings = GetDefault<USimpleExperienceSettings>();
     auto ExperienceToLoad = Settings->DefaultGameplayExperience;
@@ -72,7 +72,7 @@ const USimpleGameplayExperienceBase * USimpleExperienceSettings::GetOrLoadDefaul
                                                     "Project Settings > Game > Simple Experience Settings > "
                                                     "Experience > Default Gameplay Experience"))
 #endif
-        ExperienceToLoad = NewObject<USimpleGameplayExperienceBase>();
+        ExperienceToLoad = NewObject<USimpleGameplayExperience>();
     }
     if (ExperienceToLoad.IsValid()) {
         return ExperienceToLoad.Get();
