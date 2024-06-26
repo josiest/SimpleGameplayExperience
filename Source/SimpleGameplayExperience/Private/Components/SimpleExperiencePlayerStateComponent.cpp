@@ -1,8 +1,8 @@
 ﻿// Copyright 2024 Josie Thompson, MIT License
 #include "Components/SimpleExperiencePlayerStateComponent.h"
 #include "Components/SimpleExperienceGameStateComponent.h"
-#include "Experience/SimpleGameplayExperience.h"
 #include "LogGameplayExperience.h"
+#include "Examples/ExampleGameplayExperience.h"
 
 USimpleExperiencePlayerStateComponent::USimpleExperiencePlayerStateComponent(const FObjectInitializer& ObjectInitializer)
     : Super{ ObjectInitializer }

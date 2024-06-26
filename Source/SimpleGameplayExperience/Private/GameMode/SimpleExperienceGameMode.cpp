@@ -6,6 +6,7 @@
 #include "GameMode/SimpleExperiencePlayerState.h"
 #include "Components/SimpleExperienceGameModeComponent.h"
 #include "Components/SimpleExperienceGameStateComponent.h"
+#include "Examples/ExampleGameplayExperience.h"
 #include "GameFramework/GameStateBase.h"
 
 ASimpleExperienceGameMode::ASimpleExperienceGameMode(const FObjectInitializer & ObjectInitializer)
@@ -23,11 +24,16 @@ void ASimpleExperienceGameMode::InitGameState()
     Super::InitGameState();
     
     using UExperienceComponent = USimpleExperienceGameStateComponent;
+    using UExperience = UExampleGameplayExperience;
     if (auto* ExperienceGameState = Cast<ASimpleExperienceGameState>(GameState)) {
-        ExperienceGameState->ExperienceState->CurrentExperience = ExperienceManager->ChooseExperience();
+        if (const auto * ExampleExperience = Cast<UExperience>(ExperienceManager->ChooseExperience())) {
+            ExperienceGameState->ExperienceState->CurrentExperience = ExampleExperience;
+        }
     }
     else if (auto* ExperienceComponent = GameState->FindComponentByClass<UExperienceComponent>()) {
-        ExperienceComponent->CurrentExperience = ExperienceManager->ChooseExperience();
+        if (const auto * ExampleExperience = Cast<UExperience>(ExperienceManager->ChooseExperience())) {
+            ExperienceComponent->CurrentExperience = ExampleExperience;
+        }
     }
 #if WITH_EDITOR
     else {

@@ -13,5 +13,5 @@ public:
 	USimpleExperienceGameStateComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	UPROPERTY()
-	const USimpleGameplayExperience* CurrentExperience = nullptr;
+	const UExampleGameplayExperience* CurrentExperience = nullptr;
 };
